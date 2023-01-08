@@ -8,6 +8,7 @@ function fetchPokemon(id) {
     .then(res => res.json())
     // Nos traemos los datos.
     .then(data => {
+        console.log(data);
         createPokemon(data)
     });
 }
@@ -36,9 +37,15 @@ function createPokemon(pokemon){
     //URL de la imagen (source)
     imagen.src = pokemon.sprites.front_default;
 
+    //Creamos el tipo de pokemon
+    const type = document.createElement("p");
+    // type.textContent = `${pokemon.types[0].type.name} / ${pokemon.types[1].type.name} `;
+    type.textContent = pokemon.types[0].type.name;
+    
     //Creamos el numero del pokemon
     const number = document.createElement("p");
     number.textContent = `# ${pokemon.id}`;
+
     //Creamos el nombre del pokemon
     const name = document.createElement("p");
     name.classList.add("name");
@@ -49,9 +56,12 @@ function createPokemon(pokemon){
     card.appendChild(imagenContainer);
     card.appendChild(number);
     card.appendChild(name);
+    card.appendChild(type);
+    
 
     // Añadimos todo al DIV principal.
     pokemonContainer.appendChild(card);
 }
 
-fetchPokemons(130);
+fetchPokemons(23);
+
